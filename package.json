@@ -1,10 +1,10 @@
 {
-  "name": "youtube-chat",
+  "name": "@suzunayui/youtube-chat",
   "version": "2025.07.17",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "repository": "https://github.com/LinaTsukusu/youtube-chat.git",
-  "author": "LinaTsukusu <lina.tsukusu@gmail.com>",
+  "repository": "https://github.com/suzunayui/youtube-chat.git",
+  "author": "suzunayui",
   "license": "MIT",
   "private": false,
   "scripts": {

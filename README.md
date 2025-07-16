@@ -1,28 +1,30 @@
-# youtube-chat
-[![npm version](https://badge.fury.io/js/youtube-chat.svg)](https://badge.fury.io/js/youtube-chat)
-![npm](https://img.shields.io/npm/dt/youtube-chat)
-![NPM](https://img.shields.io/npm/l/youtube-chat)
-[![CI](https://github.com/LinaTsukusu/youtube-chat/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/LinaTsukusu/youtube-chat/actions/workflows/ci.yml)
+# @suzunayui/youtube-chat
+[![npm version](https://badge.fury.io/js/%40suzunayui%2Fyoutube-chat.svg)](https://badge.fury.io/js/@suzunayui/youtube-chat)
+![npm](https://img.shields.io/npm/dt/@suzunayui/youtube-chat)
+![NPM](https://img.shields.io/npm/l/@suzunayui/youtube-chat)
+[![CI](https://github.com/suzunayui/youtube-chat/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/suzunayui/youtube-chat/actions/workflows/ci.yml)
 
 > Fetch YouTube live chat without API
 
 ## 📅 Recent Updates
 **2025年7月17日** - YouTubeの仕様変更でマイルストーンチャット等の新しいチャットタイプでエラーが発生していた問題を修正しました。メンバーシップギフトや各種アナウンスメントチャットにも対応しています。
 
+> このパッケージは [LinaTsukusu/youtube-chat](https://github.com/LinaTsukusu/youtube-chat) をベースに改良したものです。
+
 ☢ ***You will need to take full responsibility for your action*** ☢
 
 ## Getting started
 1. Install
-    - `npm i youtube-chat`
-    - `yarn add youtube-chat`
+    - `npm i @suzunayui/youtube-chat`
+    - `yarn add @suzunayui/youtube-chat`
 2. Import
     - Javascript
     ```javascript
-    const { LiveChat } = require("youtube-chat")
+    const { LiveChat } = require("@suzunayui/youtube-chat")
     ```
     - Typescript
     ```typescript
-    import { LiveChat } from "youtube-chat"
+    import { LiveChat } from "@suzunayui/youtube-chat"
     ```
 3. Create instance with ChannelID or LiveID
     ```javascript
