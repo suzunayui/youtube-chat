@@ -1,8 +1,4 @@
 # @suzunayui/youtube-chat
-[![npm version](https://badge.fury.io/js/%40suzunayui%2Fyoutube-chat.svg)](https://badge.fury.io/js/@suzunayui/youtube-chat)
-![npm](https://img.shields.io/npm/dt/@suzunayui/youtube-chat)
-![NPM](https://img.shields.io/npm/l/@suzunayui/youtube-chat)
-[![CI](https://github.com/suzunayui/youtube-chat/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/suzunayui/youtube-chat/actions/workflows/ci.yml)
 
 > Fetch YouTube live chat without API
 
