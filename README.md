@@ -6,6 +6,9 @@
 
 > Fetch YouTube live chat without API
 
+## 📅 Recent Updates
+**2025年7月17日** - YouTubeの仕様変更でマイルストーンチャット等の新しいチャットタイプでエラーが発生していた問題を修正しました。メンバーシップギフトや各種アナウンスメントチャットにも対応しています。
+
 ☢ ***You will need to take full responsibility for your action*** ☢
 
 ## Getting started

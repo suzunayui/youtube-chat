@@ -7,15 +7,40 @@ axios.defaults.headers.common["Accept-Encoding"] = "utf-8"
 
 export async function fetchChat(options: FetchOptions): Promise<[ChatItem[], string]> {
   const url = `https://www.youtube.com/youtubei/v1/live_chat/get_live_chat?key=${options.apiKey}`
-  const res = await axios.post(url, {
+  
+  // Updated request payload with more complete context
+  const payload = {
     context: {
       client: {
         clientVersion: options.clientVersion,
         clientName: "WEB",
+        hl: "ja",
+        gl: "JP",
+        utcOffsetMinutes: new Date().getTimezoneOffset() * -1,
       },
+      user: {
+        lockedSafetyMode: false
+      },
+      request: {
+        useSsl: true,
+        internalExperimentFlags: [],
+        consistencyTokenJars: []
+      }
     },
     continuation: options.continuation,
-  })
+  }
+  
+  // Add additional headers that YouTube might expect
+  const headers = {
+    "Content-Type": "application/json",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "X-YouTube-Client-Name": "1",
+    "X-YouTube-Client-Version": options.clientVersion,
+    "Origin": "https://www.youtube.com",
+    "Referer": "https://www.youtube.com/",
+  }
+  
+  const res = await axios.post(url, payload, { headers })
 
   return parseChatData(res.data)
 }

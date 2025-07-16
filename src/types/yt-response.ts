@@ -164,6 +164,11 @@ export interface AddChatItemAction {
     liveChatMembershipItemRenderer?: LiveChatMembershipItemRenderer
     liveChatPaidStickerRenderer?: LiveChatPaidStickerRenderer
     liveChatViewerEngagementMessageRenderer?: object
+    liveChatMembershipGiftingRenderer?: LiveChatMembershipItemRenderer
+    liveChatMembershipGiftPurchaseAnnouncementRenderer?: LiveChatMembershipItemRenderer
+    liveChatMembershipGiftRedemptionAnnouncementRenderer?: LiveChatMembershipItemRenderer
+    liveChatSponsorshipsGiftPurchaseAnnouncementRenderer?: LiveChatMembershipItemRenderer
+    liveChatSponsorshipsGiftRedemptionAnnouncementRenderer?: LiveChatMembershipItemRenderer
   }
   clientId: string
 }

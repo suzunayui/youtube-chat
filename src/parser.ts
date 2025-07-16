@@ -79,16 +79,24 @@ export function parseChatData(data: GetLiveChatResponse): [ChatItem[], string] {
 
 /** サムネイルオブジェクトをImageItemへ変換 */
 function parseThumbnailToImageItem(data: Thumbnail[], alt: string): ImageItem {
+  // data が undefined または empty array の場合の処理
+  if (!data || !Array.isArray(data) || data.length === 0) {
+    return {
+      url: "",
+      alt: alt || "",
+    }
+  }
+  
   const thumbnail = data.pop()
   if (thumbnail) {
     return {
-      url: thumbnail.url,
-      alt: alt,
+      url: thumbnail.url || "",
+      alt: alt || "",
     }
   } else {
     return {
       url: "",
-      alt: "",
+      alt: alt || "",
     }
   }
 }
@@ -99,6 +107,11 @@ function convertColorToHex6(colorNum: number) {
 
 /** メッセージrun配列をMessageItem配列へ変換 */
 function parseMessages(runs: MessageRun[]): MessageItem[] {
+  // runs が undefined または null の場合は空配列を返す
+  if (!runs || !Array.isArray(runs)) {
+    return []
+  }
+  
   return runs.map((run: MessageRun): MessageItem => {
     if ("text" in run) {
       return run
@@ -138,7 +151,23 @@ function rendererFromAction(
     return item.liveChatPaidStickerRenderer
   } else if (item.liveChatMembershipItemRenderer) {
     return item.liveChatMembershipItemRenderer
+  } else if (item.liveChatMembershipGiftingRenderer) {
+    return item.liveChatMembershipGiftingRenderer
+  } else if (item.liveChatMembershipGiftPurchaseAnnouncementRenderer) {
+    return item.liveChatMembershipGiftPurchaseAnnouncementRenderer
+  } else if (item.liveChatMembershipGiftRedemptionAnnouncementRenderer) {
+    return item.liveChatMembershipGiftRedemptionAnnouncementRenderer
+  } else if (item.liveChatSponsorshipsGiftPurchaseAnnouncementRenderer) {
+    return item.liveChatSponsorshipsGiftPurchaseAnnouncementRenderer
+  } else if (item.liveChatSponsorshipsGiftRedemptionAnnouncementRenderer) {
+    return item.liveChatSponsorshipsGiftRedemptionAnnouncementRenderer
   }
+  
+  // 未知のチャットタイプの場合はログに出力（デバッグ用）
+  if (process.env.NODE_ENV !== 'production') {
+    console.log('Unknown chat item type:', Object.keys(item));
+  }
+  
   return null
 }
 
@@ -149,9 +178,9 @@ function parseActionToChatItem(data: Action): ChatItem | null {
     return null
   }
   let message: MessageRun[] = []
-  if ("message" in messageRenderer) {
+  if ("message" in messageRenderer && messageRenderer.message?.runs) {
     message = messageRenderer.message.runs
-  } else if ("headerSubtext" in messageRenderer) {
+  } else if ("headerSubtext" in messageRenderer && messageRenderer.headerSubtext?.runs) {
     message = messageRenderer.headerSubtext.runs
   }
 
@@ -160,7 +189,9 @@ function parseActionToChatItem(data: Action): ChatItem | null {
     id: messageRenderer.id,
     author: {
       name: authorNameText,
-      thumbnail: parseThumbnailToImageItem(messageRenderer.authorPhoto.thumbnails, authorNameText),
+      thumbnail: messageRenderer.authorPhoto?.thumbnails 
+        ? parseThumbnailToImageItem(messageRenderer.authorPhoto.thumbnails, authorNameText)
+        : { url: "", alt: "" },
       channelId: messageRenderer.authorExternalChannelId,
     },
     message: parseMessages(message),
